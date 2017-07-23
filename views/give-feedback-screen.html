@@ -1,0 +1,99 @@
+
+
+<!-- 	<p id="logo"><img src="assets/logo-tiniworld.png" alt=""></p> -->
+
+
+  <h3>Hello {{ customer_info.owner.full_name }} </h3>
+
+
+
+<!-- <div id="multi-picker">
+    <div id="opt1">
+        <input id="select1" type="checkbox" data-selectlist="true" data-prev="" data-next="select2">  Option 1
+    </div>
+    <div id="opt2">
+        <input id="select2" type="checkbox" data-selectlist="true" data-prev="select1" data-next="">  Option 2
+    </div>
+</div> -->
+
+<!-- 
+<ul>
+    <li>Poor</li>
+    <li>Good</li>
+    <li>Excelente</li>
+</ul>
+
+ -->
+
+<!-- <div kb-list ng-model="vm.selected">
+  <div ng-repeat="item in items" kb-item="item">{{item.title}}</div>
+</div>
+ -->
+<!-- 
+<div class="row" ng-init="fn_load()">
+
+    <div id="vote-area">
+      <label><input type="checkbox" ng-model="reverse"/>reverse?</label><br>
+      focusIndex of shown records: {{ focusIndex }}
+      <ul>
+      <li ng-repeat="record in (shownRecords = (records | orderBy: 'name':reverse))">
+        <div class="record" ng-class="{'record-highlight': $index == focusIndex }">
+          {{ record.name }}
+        </div>
+      </li>
+     </ul> 
+    </div>
+
+</div>
+
+ -->
+
+<div class="row" ng-init="fn_load()">
+
+      <label><input type="checkbox" ng-model="reverse"/>reverse?</label><br>
+      focusIndex of shown records: {{ focusIndex }}
+
+  <div class="col-sm-6 col-md-4" ng-repeat="record in (shownRecords = (records | orderBy: 'name':reverse))">
+    <div class="thumbnail">
+       <div class="record" ng-class="{'record-highlight': $index == focusIndex }">
+          {{ record.name }}
+       </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- 
+<div class="row">
+
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <img class="smiley"  src="assets/smiley-poor.png" alt="...">
+      <div class="caption">
+        <h3>Poor</h3>
+      </div>
+    </div>
+  </div>
+
+    <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <img class="smiley"  src="assets/smiley-good.png" alt="...">
+      <div class="caption">
+        <h3>Good</h3>
+      </div>
+    </div>
+  </div>
+
+    <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <img class="smiley" src="assets/smiley-excelent.png" alt="...">
+      <div class="caption">
+        <h3>Excelent</h3>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+ -->
