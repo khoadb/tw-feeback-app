@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "rebuild": "electron-rebuild -f -w sqlite3" 
+    "rebuild": "electron-rebuild -f -w sqlite3",
+    "bower": "bower install" 
   },
   "keywords": [
     "Feedback",
