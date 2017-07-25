@@ -60,6 +60,7 @@ typings/
 
 # sqlite DB file, i.e tw-feedback.db
 *.db
+test/*.db
 
 
 
