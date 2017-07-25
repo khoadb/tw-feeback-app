@@ -22,8 +22,8 @@ function createWindow () {
   win.webContents.openDevTools()
 
 
-//Sqlite stuff
-let server = require("./test/test-feedback.js");
+//test Sqlite stuff
+//let server = require("./test/test-feedback.js");
 
   // Emitted when the window is closed.
   win.on('closed', () => {

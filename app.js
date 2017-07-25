@@ -13,7 +13,7 @@ mainApp.config(['$routeProvider', function($routeProvider) {
    $routeProvider.
    
    when('/giveFeedbackPage', {
-      templateUrl: 'views/give-feedback-screen.html', controller: 'giveFeedbackCtrl'
+      templateUrl: 'views/give-feedback-screen2.html', controller: 'giveFeedbackCtrl'
    }).
 
    when('/welcomePage', {
@@ -175,18 +175,27 @@ mainApp.controller('giveFeedbackCtrl', function ($scope, $window, $location, vot
   //   $scope.records.push({ id: i, navIndex: i, name: 'record ' + i});
   // }
 
-  $scope.records.push({ id: 1, navIndex: 1, name: 'Excelent '});
-  $scope.records.push({ id: 2, navIndex: 2, name: 'Good '});
-  $scope.records.push({ id: 3, navIndex: 3, name: 'OK '});
-  $scope.records.push({ id: 4, navIndex: 4, name: 'Poor'});
-  $scope.records.push({ id: 5, navIndex: 5, name: 'Terrible'});
+  // $scope.records.push({ id: 1, navIndex: 1, name: 'Excelent ', name_vn: 'Rất tốt'});
+  // $scope.records.push({ id: 2, navIndex: 2, name: 'Good ',     name_vn: 'Tốt'});
+  // $scope.records.push({ id: 3, navIndex: 3, name: 'OK ',       name_vn: 'Bình thường'});
+  // $scope.records.push({ id: 4, navIndex: 4, name: 'Poor',      name_vn: 'Chán'});
+  // $scope.records.push({ id: 5, navIndex: 5, name: 'Terrible',  name_vn: 'Không hài lòng'});
 
+  //reverse
+  
+  $scope.records.push({ id: 5, navIndex: 5, name: 'Terrible',  name_vn: 'Không hài lòng'});
+  $scope.records.push({ id: 4, navIndex: 4, name: 'Poor',      name_vn: 'Chán'});
+  $scope.records.push({ id: 3, navIndex: 3, name: 'OK ',       name_vn: 'Bình thường'});
+  $scope.records.push({ id: 2, navIndex: 2, name: 'Good ',     name_vn: 'Tốt'});
+  $scope.records.push({ id: 1, navIndex: 1, name: 'Excelent ', name_vn: 'Rất tốt'});
 
   //set default focus
   $scope.focusIndex = 2;
   
   $scope.open = function ( index ) {
-    var record = $scope.shownRecords[ index ]
+    //var record = $scope.shownRecords[ index ] if use filter
+    var record = $scope.records[ index ]
+
     //guestFeeback = record;
     // votingService.setString(record);
     votingService.setVoteObject(record);
