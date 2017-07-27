@@ -22,9 +22,9 @@ function createWindow () {
   win.webContents.openDevTools()
 
 
-//test Sqlite stuff
-//let server = require("./test/test-feedback.js");
-//let the_db = require("./initialize-db.js");
+//Sqlite stuff
+//create sqlite db file if not yet exists
+let the_db = require("./initialize-db.js");
 
   // Emitted when the window is closed.
   win.on('closed', () => {

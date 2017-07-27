@@ -134,7 +134,7 @@ mainApp.controller('VotedController', function ($rootScope, $scope, $location, $
 
 //KHD 14.07.2017
 //Tset controller to navigate through list with key-presss
-mainApp.controller('giveFeedbackCtrl', function ($scope, $window, $location, votingService , $timeout, $routeParams, testWCFService) {
+mainApp.controller('giveFeedbackCtrl', function ($scope, $window, $location, votingService , $timeout, $routeParams, testWCFService, DBService) {
   console.log("running testControler");
   //$scope.console = $window.console;
 
@@ -207,6 +207,9 @@ mainApp.controller('giveFeedbackCtrl', function ($scope, $window, $location, vot
 
     //khd: do something here when "enter key is pushed"
     console.log("Enter ist gedruckt, macht was..."); 
+    //store vote in DB
+    DBService.storeVote(record);
+    
     $location.path("/showVoted");
 
   };
@@ -349,6 +352,52 @@ mainApp.service('testWCFService', function ($http) {
   };
 
 });
+
+
+mainApp.service('DBService', function(votingService) {
+
+    var cfg = require('./config/config');    
+    var stringValue = 'test string value';
+    var objectValue = {
+        data: 'test object value'
+    };
+
+    var voteObject = {};
+    var custObject = {}; //Customer object, get via card ID
+    
+    return {
+        storeVote: function(data) {
+			
+		   var sqlite3 = require('sqlite3').verbose();
+           var db = new sqlite3.Database('db/tw-feedback.db');
+           var date = new Date(); 
+			 
+		   //db.serialize(function() {
+		   // var stmt = db.prepare("INSERT INTO feedbacks VALUES (?, ?, ?, ?, ?, ?)");
+           //  stmt.run("cardnumber_xxx", 3, "Good", "TW007", "TW Saigon Center", date);
+           // stmt.finalize();
+		   //	});
+		   
+		   //$scope.records.push({ id: 1, navIndex: 1, name: 'Excelent ', name_vn: 'Rất tốt'});
+		   var vote = votingService.getVoteObject();
+           var cust = votingService.getCustObject();
+           console.log("start storing", vote, cust);
+           
+		   db.run("INSERT INTO feedbacks VALUES (?, ?, ?, ?, ?, ?, ?)", [cfg.survey_question, cust.nfc_code, vote.navIndex, vote.name, cfg.location_code, cfg.location_name, date], function(err) {
+			   if (err) {
+				   return console.log("sqlerror: " + err.message);
+			   }
+			   //get the last insert id
+			   console.log("A row has been inserted with rowid");
+		   });
+
+		   db.close();
+
+        }
+    }
+});
+
+
 
 mainApp.service('votingService', function() {
     var stringValue = 'test string value';
