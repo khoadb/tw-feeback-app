@@ -24,6 +24,7 @@ function createWindow () {
 
 //test Sqlite stuff
 //let server = require("./test/test-feedback.js");
+//let the_db = require("./initialize-db.js");
 
   // Emitted when the window is closed.
   win.on('closed', () => {
