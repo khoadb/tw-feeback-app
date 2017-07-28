@@ -137,11 +137,13 @@ mainApp.controller('VotedController', function ($rootScope, $scope, $location, $
 mainApp.controller('giveFeedbackCtrl', function ($scope, $window, $location, votingService , $timeout, $routeParams, testWCFService, DBService) {
   console.log("running testControler");
   //$scope.console = $window.console;
-
+  var cfg = require('./config/config');  
+  $scope.survey_question = cfg.survey_question;
 
   //reset scope values
   $scope.customer_info = {};
   //$scope.customer_trans = {};
+  
 
   //khd, get the params:
   var param1 = $routeParams.card_id;
