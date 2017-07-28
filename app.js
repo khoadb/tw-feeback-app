@@ -35,7 +35,7 @@ mainApp.config(['$routeProvider', function($routeProvider) {
    }).
 
    when('/showVoted', {
-      templateUrl: 'views/voted-screen.html', controller: 'VotedController'
+      templateUrl: 'views/thank-you-screen.html', controller: 'VotedController'
    }).
    
    otherwise({
@@ -105,7 +105,7 @@ mainApp.controller('welcomeCtrl', function($rootScope, $scope, $location) {
   
 
 //khd: 19.07.2017
-mainApp.controller('VotedController', function ($rootScope, $scope, $location, $timeout, WCFService, votingService) {
+mainApp.controller('VotedController', function ($rootScope, $scope, $location, $timeout, votingService) {
   
   $scope.message = "This the Voted controller.";
 
@@ -173,10 +173,6 @@ mainApp.controller('giveFeedbackCtrl', function ($scope, $window, $location, vot
   
   $scope.records = [];
 
-  // for (var i = 1; i <= 5; i++) {
-  //   $scope.records.push({ id: i, navIndex: i, name: 'record ' + i});
-  // }
-
   // $scope.records.push({ id: 1, navIndex: 1, name: 'Excelent ', name_vn: 'Rất tốt'});
   // $scope.records.push({ id: 2, navIndex: 2, name: 'Good ',     name_vn: 'Tốt'});
   // $scope.records.push({ id: 3, navIndex: 3, name: 'OK ',       name_vn: 'Bình thường'});
@@ -198,17 +194,13 @@ mainApp.controller('giveFeedbackCtrl', function ($scope, $window, $location, vot
     //var record = $scope.shownRecords[ index ] if use filter
     var record = $scope.records[ index ]
 
-    //guestFeeback = record;
-    // votingService.setString(record);
     votingService.setVoteObject(record);
     votingService.setCustObject($scope.customer_info);
 
-    console.log('opening : ', record );
-    //$scope.guestFB = record;
-    //guestFeeback = record;
+    //console.log('opening : ', record );
 
     //khd: do something here when "enter key is pushed"
-    console.log("Enter ist gedruckt, macht was..."); 
+    //console.log("Enter ist gedruckt, macht was..."); 
     //store vote in DB
     DBService.storeVote(record);
     
@@ -219,13 +211,19 @@ mainApp.controller('giveFeedbackCtrl', function ($scope, $window, $location, vot
   
   $scope.keys = [];
 
+  //Key code Arrow LEFT: 37
+  //Key code Arrow RIGHT: 39 
+  //Key code Up RIGHT: 38
+  //Key code Down RIGHT: 40 
+   
+
   //code: 13 = enter
   $scope.keys.push({ code: 13, action: function() { 
      $scope.open( $scope.focusIndex ); 
   }});
 
   //if up-key is pressed (38)
-  $scope.keys.push({ code: 38, action: function() {
+  $scope.keys.push({ code: 37, action: function() {
      $scope.focusIndex--;
      //khd
      if ($scope.focusIndex < 0)
@@ -233,17 +231,17 @@ mainApp.controller('giveFeedbackCtrl', function ($scope, $window, $location, vot
   }});
 
   //if down-key is pressed (40)
-  $scope.keys.push({ code: 40, action: function() {
+  $scope.keys.push({ code: 39, action: function() {
       if ($scope.focusIndex < 4) 
         $scope.focusIndex++; 
   }});
 
 
   //khd
-  $scope.keydown = function() {
-        /* validate $scope.mobileNumber here*/
-    console.log("The key is down.");
-  };
+  //$scope.keydown = function() {
+  //      /* validate $scope.mobileNumber here*/
+  //  console.log("The key is down.");
+  //};
   
   $scope.$on('keydown', function( msg, obj ) {
     //console.log("The key is donw.");
@@ -252,6 +250,7 @@ mainApp.controller('giveFeedbackCtrl', function ($scope, $window, $location, vot
    //ref: https://github.com/angular-ui/bootstrap/issues/1128
    $timeout(function() { 
     var code = obj.code;
+    console.log("The key is down & code is: " + code);
     $scope.keys.forEach(function(o) {
       if ( o.code !== code ) { return; }
       o.action();
@@ -273,56 +272,38 @@ mainApp.directive('keyTrap', function($timeout) {
 });
 
 //https://stackoverflow.com/questions/17470790/how-to-use-a-keypress-event-in-angularjs
-mainApp.directive('myEnter', function () {
-    return function (scope, element, attrs) {
-        element.bind("keydown keypress", function (event) {
-            if(event.which === 13) {
-                console.log("Enter gedruckt!");
-                scope.$apply(function (){
-                    scope.$eval(attrs.myEnter);
-                });
+// mainApp.directive('myEnter', function () {
+//     return function (scope, element, attrs) {
+//         element.bind("keydown keypress", function (event) {
+//             if(event.which === 13) {
+//                 console.log("Enter gedruckt!");
+//                 scope.$apply(function (){
+//                     scope.$eval(attrs.myEnter);
+//                 });
 
-                event.preventDefault();
-            }
-        });
-    };
-});
+//                 event.preventDefault();
+//             }
+//         });
+//     };
+// });
 
 
 //khd, some customer filter
-mainApp.filter('reverse', function() {
-  return function(input, uppercase) {
-  	//console.log("input a: ", input, uppercase); 
-    input = input || '';
-    var out = '';
-    for (var i = 0; i < input.length; i++) {
-      out = input.charAt(i) + out;
-    }
-    // conditional based on optional argument
-    if (uppercase) {
-      out = out.toUpperCase();
-    }
-    return out;
-  };
-})
-
-
-mainApp.service('WCFService', function () {
-  this.getCardInfo = function() {
-  	//var filename = path.join(__dirname, '/assets/test.json')
-    //console.log('filename: ', filename);
-
-    // existed customer
-	//getCustomerInfo("300000000511");
-	// transactions of existed customer
-    var trans = getCustomerTransactions("1646667492", 20);
-    //var mydata = JSON.parse(trans);
-    console.log("trans data", trans);
-    //return mydata;
-  };
-
-});
-
+// mainApp.filter('reverse', function() {
+//   return function(input, uppercase) {
+//   	//console.log("input a: ", input, uppercase); 
+//     input = input || '';
+//     var out = '';
+//     for (var i = 0; i < input.length; i++) {
+//       out = input.charAt(i) + out;
+//     }
+//     // conditional based on optional argument
+//     if (uppercase) {
+//       out = out.toUpperCase();
+//     }
+//     return out;
+//   };
+// })
 
 
 mainApp.service('testWCFService', function ($http) {
@@ -479,35 +460,6 @@ function getCustomerInfo(nfcCode) {
 			console.log("Response body", body)
 		}
 	}
-}
-
-/* 
-Input params:
-	- nfcCode: nfc-code on the customer card
-	- limit: number of transactions, default is 10. Transansaction was sort from newest to oldest
-Response:
-	- 200: get success
-	- others: get failed. Check body to details
-*/
-function getCustomerTransactions(nfcCode, limit = 50) {
-	var url = util.format("/transactions/get_by_nfc/%s?limit=%d", nfcCode, limit);
-	console.log(url);
-	wcfRequest('get', url, callback);
-
-	function callback(err, response, body) {
-		if (err) {
-			console.log("Some errors occurred: ", err);
-			return;
-		}
-
-		if (response.statusCode === 200) {
-			console.log("Yup, customer transactions:", JSON.stringify(body, null, 4))
-		} else {
-			console.log("Response code", response.statusCode)
-			console.log("Response body", body)
-		}
-	}
-
 }
 
 
