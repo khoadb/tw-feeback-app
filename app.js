@@ -39,7 +39,10 @@ mainApp.config(['$routeProvider', function($routeProvider) {
    }).
    
    otherwise({
-      redirectTo: '/welcomePage'
+      //redirectTo: '/welcomePage'
+      //start with the giveFeedback screen where user can start voting
+      //without see the welcome screen and without autenticate with card tap
+      redirectTo: '/giveFeedbackPage'
    });
 	
 }]);
@@ -124,10 +127,12 @@ mainApp.controller('VotedController', function ($rootScope, $scope, $location, $
 
     $timeout(function(){ 
       logged_in = true;
-      $location.path("/showBalance"); 
-  },100000);
+      //$location.path("/showBalance");
+      //return back to the screen where user can vote 
+      $location.path("/giveFeedbackPage");
+  },3000);
 
-    console.log('end timeer: ');  
+    //console.log('end timeer: ');  
     
 })
 
