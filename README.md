@@ -17,6 +17,23 @@ Bower
 Autostart in Raspberry Pi
  
 Edit file ~/.config/lxsession/LSDE-pi/autostart
-Add line @sh /home/pi/development/checkbalance-app/tools/launcher.sh (note, the launcher.sh needs to be created and edited first.
+Add line @sh /home/pi/development/tw-feedback-app/tools/launcher.sh (note, the launcher.sh needs to be created and edited first.
+
+
+Keyboard Emulator via retrogame by Adafruit
+
+ref: https://github.com/adafruit/Adafruit-Retrogame
+
+- Download the zip file and extract to a folder.
+- An example file 'retrogame.cfg' is included in the 'configs' directory, copy this file to the /boot directory so retrogame can find it
+- run the executeable file: sudo ./retrogame (this can be run in background &)
+
+
+GPIO information & config
+
+Ref: https://hackaday.io/project/2090/instructions
+
+
+
 
 
