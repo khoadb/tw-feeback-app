@@ -35,6 +35,10 @@ ref: https://github.com/adafruit/Adafruit-Retrogame
 - An example file 'retrogame.cfg' is included in the 'configs' directory, copy this file to the /boot directory so retrogame can find it
 - run the executeable file: sudo ./retrogame (this can be run in background &)
 
+Autostart keyboard emulator in Pi:
+
+- sudo nano /etc/rc.local
+- Before the final “exit 0” line, insert this line: /home/pi/Adafruit-Retrogame/retrogame &
 
 GPIO information & config
 
