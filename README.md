@@ -28,6 +28,12 @@ ref: https://github.com/adafruit/Adafruit-Retrogame
 - An example file 'retrogame.cfg' is included in the 'configs' directory, copy this file to the /boot directory so retrogame can find it
 - run the executeable file: sudo ./retrogame (this can be run in background &)
 
+ we’ll then set up the system to launch this automatically in the background at startup.
+- sudo nano /etc/rc.local
+
+Before the final “exit 0” line, insert this line:
+/home/pi/Adafruit-Retrogame/retrogame &
+
 
 GPIO information & config
 
