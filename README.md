@@ -37,6 +37,14 @@ ref: https://github.com/adafruit/Adafruit-Retrogame
 - An example file 'retrogame.cfg' is included in the 'configs' directory, copy this file to the /boot directory so retrogame can find it
 - run the executeable file: sudo ./retrogame (this can be run in background &)
 
+!retrogame.cfg for tw-feedback-app
+
+LEFT      25  # Joypad left
+RIGHT      9  # Joypad right
+UP        10  # Joypad up
+DOWN      17  # Joypad down
+ENTER     23  # 'Start' button
+
 
  we’ll then set up the system to launch this automatically in the background at startup.
 - sudo nano /etc/rc.local
