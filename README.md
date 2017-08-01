@@ -64,6 +64,15 @@ GPIO information & config
 Ref: https://hackaday.io/project/2090/instructions
 
 
+!BONUS! 
+
+customizing splash screen in RaspBerry Pi 3:
+(ref: https://www.raspberrypi.org/forums/viewtopic.php?f=63&t=162652)
+
+So it's simply a matter of putting a 'splash.png' file in the right place (/usr/share/plymouth/themes/pix/)
+
+
+
 
 
 
