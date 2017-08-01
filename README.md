@@ -64,6 +64,17 @@ GPIO information & config
 Ref: https://hackaday.io/project/2090/instructions
 
 
+NO SCREENSAVER - Disabling the blank screen once 
+
+Ref: http://www.geeks3d.com/hacklab/20160108/how-to-disable-the-blank-screen-on-raspberry-pi-raspbian/
+
+If you want to disable the blank screen at every startup, just update the /etc/lightdm/lightdm.conf file and add in the [SeatDefaults] section the following command:
+
+[SeatDefaults]
+xserver-command=X -s 0 -dpms
+
+
+
 !BONUS! 
 
 customizing splash screen in RaspBerry Pi 3:
