@@ -2,6 +2,8 @@ var request = require('request');
 var util = require ('util');
 //humanize time
 //var ago = require('s-ago');
+const Analytics = require('analytics-node');
+const segment_client = new Analytics('StsFdJ2ZmlNXlAXsDi60If3CaPU98f6Z', { flushAt: 1 });
 
 const path = require('path')
 
@@ -208,6 +210,23 @@ mainApp.controller('giveFeedbackCtrl', function ($scope, $window, $location, vot
     //console.log("Enter ist gedruckt, macht was..."); 
     //store vote in DB
     DBService.storeVote(record);
+
+    //khd: 02.08.2017
+    //Analytic using Segment.com service 
+    var zeit = new Date();
+    segment_client.track({
+      userId: cfg.location_code,
+      event: 'Gives feedback',
+      properties: {
+        survey_question: cfg.survey_question,
+        location_code: cfg.location_code, 
+        location_name: cfg.location_name,
+        rated_score: record.navIndex,
+        rated_name: record.name,
+        rated_name_vn: record.name_vn,
+        date: zeit 
+      }
+    });
     
     $location.path("/showVoted");
 
