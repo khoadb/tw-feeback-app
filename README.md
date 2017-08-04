@@ -74,6 +74,28 @@ If you want to disable the blank screen at every startup, just update the /etc/l
 xserver-command=X -s 0 -dpms
 
 
+SYNC SQLite DB file
+
+(flow: run cronjob to export to CSV, run cronjob to sync files to remote host)
+
+Ref: http://www.thegeekstuff.com/2011/07/rsync-over-ssh-without-password
+
+Using rsync tool to sync the SQLite database to a remove server running rsync daemon,
+this server will receive all database files from all feedback devices. NOTE: should add center_code as prefix to sqlite db file name, i.e. tw-feedback_tw014.db
+
+- rsync command on feedback device: xxxx
+- Edit crontab to set cronjob schedule, i.e. sync every hour.
+- issue command crontab -e
+- add a line i.e:  */3 * * * * rsync -azP /home/pi/development/db/ [path on remote host] 
+- i.e: */3 * * * * rsync -azP -e ssh /home/pi/development/db/ root1@192.168.8.55:/home/root1/feedback-db
+
+in case we want to export to CSV and sync it too:
+
+- i.e: */3 * * * * sqlite3 -header -csv /home/pi/development/db/tw-feedback.db "select rowid, * from feedbacks;" > /home/pi/development/tw-feedback-app/db/feedback_tw014.csv
+
+
+
+
 
 !BONUS! 
 

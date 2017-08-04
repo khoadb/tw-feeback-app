@@ -376,8 +376,11 @@ mainApp.service('DBService', function(votingService) {
         storeVote: function(data) {
 			
 		   var sqlite3 = require('sqlite3').verbose();
-           var db = new sqlite3.Database('db/tw-feedback.db');
+           var db_filename =  'db/tw-feedback_'+ cfg.location_code + '.db'; 
+           //var db = new sqlite3.Database('db/tw-feedback.db');
+           var db = new sqlite3.Database(db_filename);
            var date = new Date(); 
+           var date_string = new Date().toISOString();
 			 
 		   //db.serialize(function() {
 		   // var stmt = db.prepare("INSERT INTO feedbacks VALUES (?, ?, ?, ?, ?, ?)");
@@ -390,7 +393,7 @@ mainApp.service('DBService', function(votingService) {
            var cust = votingService.getCustObject();
            console.log("start storing", vote, cust);
            
-		   db.run("INSERT INTO feedbacks VALUES (?, ?, ?, ?, ?, ?, ?)", [cfg.survey_question, cust.nfc_code, vote.navIndex, vote.name, cfg.location_code, cfg.location_name, date], function(err) {
+		   db.run("INSERT INTO feedbacks VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [cfg.survey_question, cust.nfc_code, vote.navIndex, vote.name, cfg.location_code, cfg.location_name, date, date_string], function(err) {
 			   if (err) {
 				   return console.log("sqlerror: " + err.message);
 			   }
