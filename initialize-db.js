@@ -13,6 +13,7 @@
  * location_code TEXT   => i.e. TW_001
  * location_name TEXT   => i.e. TW Saigon Center
  * date_created INTEGER => time in miliseconds from 1970
+ * date_string TEXT     => timestamp as string (for easy readable)
 */ 
 
 var sqlite3 = require('sqlite3').verbose();
