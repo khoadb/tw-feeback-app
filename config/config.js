@@ -26,7 +26,7 @@ config.location_name = 'TW Saigon Center';
 // tT011	Trung tâm Vincom Cần Thơ
 // tT012	Trung tâm Vincom Lê Văn Việt
 // tT013	Trung tâm Aeon Bình Tân
-// tT014	Trung tâm Saigon Center
+// tT014	Trung tâm Saigon Center (wlan1 - MAC Adress: 18:d6:c7:1a:0e:96, wlan0 - MAC Adress: b8:27:eb:dd:f0:b5)
 // tW002	Trung tâm Nowzone
 // tW004	TT CoopMart Lý Thường Kiệt
 // tW006	Trung tâm Syrena Hà Nội
