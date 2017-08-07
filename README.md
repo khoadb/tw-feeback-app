@@ -95,6 +95,14 @@ in case we want to export to CSV and sync it too:
 
 
 
+PI CONFIG - Hostname
+
+In order to be able to recognize the Pi Feedback device on the network easily and to get the local IP adress for SSH we need to set a hostname for the device, i.e. PiFeedback_tT014.
+
+- sudo nano /etc/hostname
+- set the hostname to ie. "PiFeedback_tT014"
+
+Ref: https://thepihut.com/blogs/raspberry-pi-tutorials/19668676-renaming-your-raspberry-pi-the-hostname
 
 
 !BONUS! 
